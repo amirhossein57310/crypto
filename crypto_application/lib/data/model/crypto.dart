@@ -1,7 +1,7 @@
 class Crypto {
   String name;
   String id;
-  int rank;
+  String rank;
   String symbol;
   double marketCapUsd;
   double volumeUsd24Hr;
@@ -15,7 +15,7 @@ class Crypto {
     return Crypto(
       jsonMapObject['name'],
       jsonMapObject['id'],
-      int.parse(jsonMapObject['rank']),
+      jsonMapObject['rank'],
       jsonMapObject['symbol'],
       double.parse(jsonMapObject['marketCapUsd']),
       double.parse(jsonMapObject['volumeUsd24Hr']),
