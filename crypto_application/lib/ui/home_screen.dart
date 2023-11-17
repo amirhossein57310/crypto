@@ -3,7 +3,6 @@ import 'package:crypto_application/data/bloc/crypto_event.dart';
 import 'package:crypto_application/data/bloc/crypto_state.dart';
 import 'package:crypto_application/data/const/constants.dart';
 import 'package:crypto_application/data/model/crypto.dart';
-import 'package:crypto_application/di/di.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,11 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       backgroundColor: Colors.grey[800],
       body: SafeArea(
-        child: BlocProvider(
-          create: (context) {
-            var bloc = CryptoBloc(locator.get());
-            bloc.add(CryproResposneEvent());
-            return bloc;
+        child: RefreshIndicator(
+          onRefresh: () async {
+            BlocProvider.of<CryptoBloc>(context).add(CryproResposneEvent());
           },
           child: ContentWidget(),
         ),
@@ -59,7 +56,6 @@ class ContentWidget extends StatefulWidget {
 }
 
 class _ContentWidgetState extends State<ContentWidget> {
-  bool click = false;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CryptoBloc, CryptoState>(
@@ -85,9 +81,9 @@ class _ContentWidgetState extends State<ContentWidget> {
                           padding: const EdgeInsets.all(10.0),
                           child: TextField(
                             onChanged: (value) async {
-                              context
-                                  .read<CryptoBloc>()
-                                  .add(CryptoResponseFilterEvent(value));
+                              context.read<CryptoBloc>().add(
+                                    CryptoResponseFilterEvent(value),
+                                  );
                             },
                             textDirection: TextDirection.rtl,
                             textAlign: TextAlign.right,
@@ -106,18 +102,6 @@ class _ContentWidgetState extends State<ContentWidget> {
                                 fontSize: 23,
                                 fontWeight: FontWeight.bold,
                               ),
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: click,
-                          child: Text(
-                            'در حال آپدیت کردن رمزارزها',
-                            style: TextStyle(
-                              color: greenColor,
-                              fontFamily: 'mr',
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
@@ -146,9 +130,9 @@ class _ContentWidgetState extends State<ContentWidget> {
                           padding: const EdgeInsets.all(10.0),
                           child: TextField(
                             onChanged: (value) async {
-                              context
-                                  .read<CryptoBloc>()
-                                  .add(CryptoResponseFilterEvent(value));
+                              context.read<CryptoBloc>().add(
+                                    CryptoResponseFilterEvent(value),
+                                  );
                             },
                             textDirection: TextDirection.rtl,
                             textAlign: TextAlign.right,
@@ -167,18 +151,6 @@ class _ContentWidgetState extends State<ContentWidget> {
                                 fontSize: 23,
                                 fontWeight: FontWeight.bold,
                               ),
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: click,
-                          child: Text(
-                            'در حال آپدیت کردن رمزارزها',
-                            style: TextStyle(
-                              color: greenColor,
-                              fontFamily: 'mr',
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),

@@ -16,5 +16,6 @@ class CryptoLoadingState extends CryptoState {}
 class CryptoFilterState extends CryptoState {
   Either<String, List<Crypto>> response;
   String value;
+
   CryptoFilterState(this.response, this.value);
 }

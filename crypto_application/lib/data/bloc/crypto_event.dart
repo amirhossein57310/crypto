@@ -6,5 +6,6 @@ class CryproResposneEvent extends CryproEvent {
 
 class CryptoResponseFilterEvent extends CryproEvent {
   String value;
+
   CryptoResponseFilterEvent(this.value);
 }
